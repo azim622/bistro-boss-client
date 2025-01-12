@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
-    return signOut(auth)
+    return signOut(auth);
   };
 
   const updateUserProfile = (name, photo) => {
@@ -54,16 +54,16 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         // get token and store client
         const userInfo = { email: currentUser.email };
-        axiosPublic.post("/jwt", userInfo).
-        then((res) => {
+        axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
           }
         });
       } else {
-        localStorage.removeItem('access-token');
+        localStorage.removeItem("access-token");
+        setLoading(false);
       }
-      setLoading(false);
     });
     return () => {
       return unsubscribe;

@@ -17,6 +17,9 @@ import AdminRoutes from "./PrivetRoutes.jsx/AdminRoutes";
 import ManageItems from "../pages/DashBoard/ManageItems/ManageItems";
 import UpdateItem from "../pages/DashBoard/UpdateItem/UpdateItem";
 import Payment from "../pages/DashBoard/Payment/Payment";
+import PaymentHistory from "../pages/DashBoard/PaymentHistory/PaymentHistory";
+import UserHome from "../pages/DashBoard/UserHome/UserHome";
+import AdminHome from "../pages/DashBoard/AdminHome/AdminHome";
 
   export const router = createBrowserRouter([
     {
@@ -54,6 +57,10 @@ import Payment from "../pages/DashBoard/Payment/Payment";
       element: <PrivetRoutes><DashBoard></DashBoard></PrivetRoutes>,
       children:[
         {
+          path:'userHome',
+          element: <UserHome></UserHome>
+        },
+        {
           path:'cart',
           element:<Cart></Cart>
         },
@@ -61,9 +68,17 @@ import Payment from "../pages/DashBoard/Payment/Payment";
           path:'payment',
           element:<Payment></Payment>
         },
+        {
+          path:'paymentHistory',
+          element:<PaymentHistory></PaymentHistory>
+        },
 
 
         // admin routes
+        {
+          path:'adminHome',
+          element:<AdminRoutes><AdminHome></AdminHome></AdminRoutes>
+        },
         {
           path:'addItems',
           element:<AdminRoutes><AddItems></AddItems></AdminRoutes>
@@ -75,7 +90,7 @@ import Payment from "../pages/DashBoard/Payment/Payment";
         {
           path: 'updateItem/:id',
           element: <AdminRoutes><UpdateItem></UpdateItem></AdminRoutes>,
-          loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
+          loader: ({params}) => fetch(`https://bistro-boss-server-12.vercel.app/menu/${params.id}`)
         },
         {
           path:"allUser",

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import UseCart from "../../../hooks/UseCart";
 import UseAxios from "../../../hooks/UseAxios";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const ChackOutForm = () => {
   const [error, setError] = useState("");
@@ -12,7 +14,8 @@ const ChackOutForm = () => {
   const [transactionId, setTransactionId] = useState("");
   const elements = useElements();
   const axiosSecure = UseAxios();
-  const [cart] = UseCart();
+  const [cart , refetch] = UseCart();
+  const navigate = useNavigate()
 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
@@ -83,16 +86,27 @@ const ChackOutForm = () => {
 
         //  now save the payment in the database
         const payment = {
-          email: user.email,
-          price: totalPrice,
-          transactionId: payment.id,
-          date: new Date(),
-          cartId: cart.map((item) => item._id),
-          menuIteId: cart.map((item) => item.menuId),
-          status: "pending",
-        };
+            email: user.email,
+            price: totalPrice,
+            transactionId: paymentIntent.id,
+            date: new Date(), // utc date convert. use moment js to 
+            cartIds: cart.map(item => item._id),
+            menuItemIds: cart.map(item => item.menuId),
+            status: 'pending'
+        }
         const res =await axiosSecure.post('/payments' , payment)
-        console.log('payment saved' , res)
+        console.log('payment saved' , res.data)
+        refetch()
+        if(res?.data?.paymentResult?.insertedId){
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your Payment Was Successfull",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate('/dashboard/paymentHistory')
+        }
       }
     }
   };
