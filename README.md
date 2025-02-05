@@ -27,10 +27,8 @@ Bisto Boss is a comprehensive restaurant management system designed to streamlin
 - react-router-dom
 - axios
 - firebase
-- mongoose
 - express
 - dotenv
-- bcryptjs
 - jsonwebtoken
 
 ## How to Run the Project Locally
