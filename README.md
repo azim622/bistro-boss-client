@@ -3,6 +3,9 @@
 ## Overview
 Bisto Boss is a comprehensive restaurant management system designed to streamline operations, improve customer experience, and enhance overall efficiency. It offers features for order management, menu customization, staff coordination, and real-time analytics to help restaurant owners manage their business effectively.
 
+## Live Link
+https://bistro-boss-project-85263.web.app/
+
 ## Screenshot
 ![Bisto Boss Screenshot](https://via.placeholder.com/800x400) *(Replace with an actual screenshot of the project)*
 
@@ -34,5 +37,7 @@ Bisto Boss is a comprehensive restaurant management system designed to streamlin
 ## How to Run the Project Locally
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/bisto-boss.git
+   git clone https://github.com/https://github.com/azim622/bistro-boss-client
+
+   
 
